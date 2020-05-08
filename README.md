@@ -1,6 +1,6 @@
 # Fortified Test Functions
 
-The [run_bumpy_branin.py](run_bumpy_branin.py) Python file reproduces the results presented in `Weaponizing Favorite Test Functions for Testing Global Optimization Algorithms: An illustration with the Branin-HooFunction` as seen in AIAA Aviation 2020. 
+The [run_bumpy_branin.py](run_bumpy_branin.py) Python file reproduces the results presented in `Weaponizing Favorite Test Functions for Testing Global Optimization Algorithms: An illustration with the Branin-Hoo Function` as seen in AIAA Aviation 2020. 
 
 This work demonstrates that optimization test functions can be made more challenging by adding small radial basis functions to the local optima. This is illustrated here for the Branin-Hoo function, which has three local optima which are also global optima.
 
