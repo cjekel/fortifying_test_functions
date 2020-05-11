@@ -34,12 +34,12 @@ pop_size = 10  # DE population size
 max_iter = 20  # number of DE iterations
 use_bfgs = False  # whether to use BFGS after DE
 
-# The number of function evaluations is defined as
-# (maxiter + 1) * popsize * number_of_dimmensions
-# (100 + 1) * 10 * 2 = 220 function evaluations
+# The number of function evaluations for DE is given as
+# (max_iter + 1) * pop_size * n_var
+# (20 + 1) * 10 * 2 = 420 function evaluations for the given parameters above
 
-# constants for functions
-bump_amp = 10.   # need to be the same as in the bumpy function
+# bump information
+bump_amp = 10.
 opt_fun = 0.397887-bump_amp*np.exp(-1.)
 tol_fun = 0.01  # how close we need to get to optimum to declare success
 epsilon = 1
@@ -48,13 +48,13 @@ bumpid = 1
 x1 = [-np.pi, 12.275]
 x2 = [np.pi, 2.275]
 x3 = [9.42478, 2.475]
-x0 = x1
+x0 = x1  # the coordinates of the bumped optimum
 if bumpid == 2:
     x0 = x2
 if bumpid == 3:
     x0 = x3
 
-# bumpy Branin-Hoo paramters
+# Branin-Hoo paramters
 a = 1.
 b = 5.1 / (4*np.pi**2)
 c = 5/np.pi
@@ -74,7 +74,6 @@ def my_fun(x):
     A = a*(x[1] - b*x[0]**2+c*x[0]-r)**2
     B = s*(1-t)*np.cos(x[0])+s
     # subtract a bump at the first global optimum
-    x0 = [-np.pi, 12.275]
     bump1 = bump_2d(x, x0, epsilon)
     return A + B-bump_amp*bump1
 
@@ -92,7 +91,7 @@ res_fun_values = np.zeros(n_runs)
 successes = np.zeros(n_runs)
 optid = np.zeros(n_runs)
 dist = np.zeros(3)
-# Which bump region does it fall into
+# The fraction of runs in each optimum region
 b_1 = 0.
 b_2 = 0.
 b_3 = 0.
@@ -106,8 +105,8 @@ for i in range(n_runs):
              init='latinhypercube'  # LHS random sampling for initial pop
              )
 
-    res_x = res.x
-    res_f = res.fun
+    res_x = res.x  # the optimum design point
+    res_f = res.fun  # the optimum function value
 
     # find which minimum it went to, success, and store results
     dist[0] = np.linalg.norm(res_x-x1)*epsilon
@@ -135,13 +134,13 @@ b_1 = b_1/n_runs
 b_2 = b_2/n_runs
 b_3 = b_3/n_runs
 
-pf = 100*(1-np.sum(successes)/n_runs)
+pf = 100*(1-np.sum(successes)/n_runs)  # percent failures
 
 print('Use bfgs?', use_bfgs)
 print('Population', pop_size)
 print('Max iterations', max_iter)
 print('Percent failures', pf)
 print('Average num function evals', avg_nfev)
-print('Percentage at x1', b_1)
-print('Percentage at x2', b_2)
-print('Percentage at x3', b_3)
+print('Fraction at x1', b_1)
+print('Fraction at x2', b_2)
+print('Fraction at x3', b_3)
