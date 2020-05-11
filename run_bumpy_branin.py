@@ -34,10 +34,6 @@ pop_size = 10  # DE population size
 max_iter = 20  # number of DE iterations
 use_bfgs = False  # whether to use BFGS after DE
 
-# The number of function evaluations for DE is given as
-# (max_iter + 1) * pop_size * n_var
-# (20 + 1) * 10 * 2 = 420 function evaluations for the given parameters above
-
 # bump information
 bump_amp = 10.
 opt_fun = 0.397887-bump_amp*np.exp(-1.)
@@ -123,9 +119,7 @@ for i in range(n_runs):
     if opt_fun+tol_fun >= res_f:
         successes[i] = 1
     avg_nfev = avg_nfev + res.nfev
-# cumulative number of function evals in in nruns
-n_fvals = (max_iter + 1) * pop_size * n_var
-cum_number_eval = res.nfev*n_runs
+
 # number of successful runs based on tol_fun
 num_success = np.sum(opt_fun+tol_fun >= res_fun_values)
 # number of function evaluations
