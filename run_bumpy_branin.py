@@ -63,7 +63,7 @@ s = 10.
 t = 1. / (8.*np.pi)
 
 
-def bump_2d(x, x0, epsilon):
+def bump_2d(x):
     r2 = (x[0]-x0[0])**2+(x[1]-x0[1])**2
     bump = np.exp(-1/(1-epsilon**2*r2)) * np.heaviside((1./epsilon**2-r2), 0.5)
     return bump
@@ -74,7 +74,7 @@ def my_fun(x):
     A = a*(x[1] - b*x[0]**2+c*x[0]-r)**2
     B = s*(1-t)*np.cos(x[0])+s
     # subtract a bump at the first global optimum
-    bump1 = bump_2d(x, x0, epsilon)
+    bump1 = bump_2d(x)
     return A + B-bump_amp*bump1
 
 
