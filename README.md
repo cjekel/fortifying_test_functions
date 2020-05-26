@@ -1,4 +1,4 @@
-# Weaponizing Test Functions
+# Fortifying Test Functions
 
 The [run_bumpy_branin.py](run_bumpy_branin.py) Python file reproduces the results presented in `Weaponizing Favorite Test Functions for Testing Global Optimization Algorithms: An illustration with the Branin-Hoo Function` as seen in AIAA Aviation 2020. 
 
